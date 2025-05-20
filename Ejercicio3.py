@@ -4,45 +4,35 @@
 # El sistema deberá permitir ingresar el monto de venta por producto y mostrar un 
 # resumen por stand, por día, y un total general de la feria.
 
-print("="*60)
-print("Inventario de ventas - Feria estudiantil UAM")
-input("Presione ENTER para comenzar")
-
-# Datos de los 4 stands
-stands = [
-    ("Arte y Creatividad", ["cuadros", "llaveros", "pulseras"]),
-    ("Eco-UAM", ["bolsas", "velas", "macetas"]),
-    ("Sabores Callejeros", ["elotes", "jamaica", "papas fritas"]),
-    ("Dulce de Feria", ["algodón", "globos", "manzanas"])
-]
-
-totales = []
-
-for stand in stands:
-    nombre, productos = stand
-    print(f"\nStand: {nombre}")
-    precios = []
-    for producto in productos:
-        precio = float(input(f"Precio de {producto}: "))
-        precios.append(precio)
-
-    total_stand = 0
-    for dia in range(1, 4):
-        print(f"Día {dia}")
-        total_dia = 0
-        for i in range(3):
-            cantidad = int(input(f"¿Cuántas veces vendió {productos[i]}? "))
-            total_dia += cantidad * precios[i]
-        total_stand += total_dia
+def registrar_ventas():
+    print("Presione ENTER para comenzar")
+    input()
+    print("\nStand: Arte y Creatividad")
+    # Ingresar precios de los productos
+    try:
+        precio_cuadro = float(input("Precio de cuadros: "))
+        precio_llavero = float(input("Precio de llaveros: "))
+        precio_pulsera = float(input("Precio de pulseras: "))
+    except ValueError:
+        print("Por favor, ingresa números válidos para los precios.")
+        return
+    total_general = 0
+    for dia in range(1, 4):  # Días 1 a 3
+        print(f"\nDía {dia}")
+        try:
+            cantidad_cuadros = int(input("¿Cuántas veces vendió cuadros? "))
+            cantidad_llaveros = int(input("¿Cuántas veces vendió llaveros? "))
+            cantidad_pulseras = int(input("¿Cuántas veces vendió pulseras? "))
+        except ValueError:
+            print("Por favor, ingresa solo números enteros para las cantidades.")
+            return
+        total_dia = (
+            cantidad_cuadros * precio_cuadro +
+            cantidad_llaveros * precio_llavero +
+            cantidad_pulseras * precio_pulsera
+        )
         print(f"Total del día {dia}: {total_dia:.2f} C$")
-    
-    totales.append(total_stand)
-
-# Mostrar resumen
-print("\n" + "="*50)
-print("Resumen total por stand:")
-for i in range(4):
-    print(f"{stands[i][0]}: {totales[i]:.2f} C$")
-print("="*50)
-print(f"TOTAL GENERAL DE LA FERIA: {sum(totales):.2f} C$")
-
+        total_general += total_dia
+    print(f"\nTotal general de la feria: {total_general:.2f} C$")
+if __name__ == "__main__":
+    registrar_ventas()
