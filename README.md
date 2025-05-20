@@ -1,5 +1,5 @@
 # Trabajo_V
-# Luis
-# Ariadna Barboza
 # Alfredo Jarquín
+# Ariadna Barboza
+# Luis
 # Caleb 
